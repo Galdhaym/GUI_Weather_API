@@ -32,11 +32,4 @@ public class ForecastDays {
                 '}';
     }
 
-    public List<Day> filterByAvgTempGreaterThan(double temperature) {
-        return forecastDays.stream()
-                .map(forecastDay -> forecastDay.getDay())
-                .filter(day -> day.getAvgtemp_c() > temperature)
-                .collect(Collectors.toList());
-    }
-
 }

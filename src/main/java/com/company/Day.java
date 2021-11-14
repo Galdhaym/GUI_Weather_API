@@ -2,6 +2,8 @@ package com.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Comparator;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Day {
     private double maxtemp_c;
@@ -102,4 +104,9 @@ public class Day {
                 "    totalprecip_mm=" + totalprecip_mm + "\n"+
                 '}';
     }
+
+    public static Comparator<Day> byMaxtemp_c = (Day day1, Day day2) -> Double.compare(day1.getMaxtemp_c(), day2.getMaxtemp_c());
+    public static Comparator<Day> byMintemp_c = (Day day1, Day day2) -> Double.compare(day1.getMintemp_c(), day2.getMintemp_c());
+    public static Comparator<Day> byAvghumidity = (Day day1, Day day2) -> Double.compare(day1.getAvghumidity(), day2.getAvghumidity());
+
 }

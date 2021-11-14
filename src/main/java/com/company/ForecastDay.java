@@ -8,9 +8,6 @@ import java.util.Comparator;
 
 public class ForecastDay {
     private Day day;
-    public static Comparator<ForecastDay> byMaxtemp_c = (ForecastDay day1, ForecastDay day2) -> Double.compare(day1.getDay().getMaxtemp_c(), day2.getDay().getMaxtemp_c());
-    public static Comparator<ForecastDay> byMintemp_c = (ForecastDay day1, ForecastDay day2) -> Double.compare(day1.getDay().getMintemp_c(), day2.getDay().getMintemp_c());
-    public static Comparator<ForecastDay> byAvghumidity = (ForecastDay day1, ForecastDay day2) -> Double.compare(day1.getDay().getAvghumidity(), day2.getDay().getAvghumidity());
 
     public Day getDay() {
         return day;
