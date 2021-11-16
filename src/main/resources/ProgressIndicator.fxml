@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="progressContainer" prefHeight="734.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane fx:id="progressContainer" prefHeight="734.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ProgressIndicator fx:id="progressBar" layoutX="535.0" layoutY="324.0" progress="0.0" AnchorPane.bottomAnchor="367.6" AnchorPane.leftAnchor="535.0" AnchorPane.rightAnchor="535.6" AnchorPane.topAnchor="324.0" />
+      <ProgressIndicator fx:id="progressBar" layoutX="535.0" layoutY="324.0" AnchorPane.bottomAnchor="367.6" AnchorPane.leftAnchor="535.0" AnchorPane.rightAnchor="535.6" AnchorPane.topAnchor="324.0" />
    </children>
 </AnchorPane>
