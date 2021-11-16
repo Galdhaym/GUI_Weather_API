@@ -1,5 +1,6 @@
 package com.company;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +17,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ForecastController {
+    @FXML
+    private Label filterLabel;
+    @FXML
+    private Label daysLabel;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private AnchorPane containerPane;
+    @FXML
+    private TextField cityTextField;
     @FXML
     private TextField daysTextField;
     @FXML
@@ -78,19 +89,47 @@ public class ForecastController {
         signButton.setValue(">");
     }
 
+    private void validateIntInput(TextField field, Label label){
+        try {
+            Integer.parseInt(field.getText());
+        }
+        catch (NumberFormatException e){
+            Platform.runLater(() -> {
+                errorLabel.setText(String.format("Поле '%s' должно быть целочисленным значением!", label.getText()));
+            });
+        }
+    }
+
+    private void validateDoubleInput(TextField field, Label label){
+        try {
+            Double.parseDouble(field.getText());
+        }
+        catch (NumberFormatException e){
+            Platform.runLater(() -> {
+                errorLabel.setText(String.format("Поле '%s' должно быть дробным значением!", label.getText()));
+            });
+        }
+    }
+
     @FXML
     private void getForecast(ActionEvent event) throws IOException {
+
         Thread thread = new Thread(() -> {
             try {
-                Forecast forecast = WeatherForecastLoader.getWeatherForecastByURL("f720c35b125e4c18a38191356201110", "Одесса", Integer.parseInt(daysTextField.getText()));
+                validateIntInput(daysTextField, daysLabel);
+                String cityValue = cityTextField.getText();
+                int daysValue = Integer.parseInt(daysTextField.getText());
+                Forecast forecast = WeatherForecastLoader.getWeatherForecastByURL("f720c35b125e4c18a38191356201110", cityValue, daysValue);
                 ArrayList<ForecastDay> forecastDays = forecast.getForecast().getForecastDays();
                 List<Day> days = forecastDays.stream()
                         .map(ForecastDay::getDay)
                         .collect(Collectors.toList());
                 items = FXCollections.observableList(days);
                 forecastTable.setItems(items);
-            } catch (IOException  e) {
-                System.out.println(e.getLocalizedMessage());
+            } catch (IOException e) {
+                Platform.runLater(() -> {
+                    errorLabel.setText(e.getLocalizedMessage());
+                });
             }
         });
         thread.start();
@@ -103,6 +142,7 @@ public class ForecastController {
     }
 
     private void filterTableByParam(ComboBox<String> filterComboBox, TableView<Day> table){
+        validateDoubleInput(filterValue, filterLabel);
         Double value = Double.parseDouble(filterValue.getText());
         table.setItems(filterByParam(items, signButton.getValue(), filterComboBox.getValue(), value));
     }

@@ -6,19 +6,19 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="containerPane" prefHeight="734.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.ForecastController">
-   <Button fx:id="getForecastButton" layoutX="490.0" layoutY="118.0" mnemonicParsing="false" onAction="#getForecast" text="Получить данные " />
+   <Button fx:id="getForecastButton" layoutX="490.0" layoutY="147.0" mnemonicParsing="false" onAction="#getForecast" text="Получить данные " />
    <Label layoutX="480.0" layoutY="14.0" prefHeight="28.0" prefWidth="150.0" text="Прогноз погоды">
       <font>
          <Font size="19.0" />
       </font></Label>
-   <AnchorPane fx:id="sortingPanel" layoutX="115.0" layoutY="139.0" prefHeight="74.0" prefWidth="262.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <AnchorPane fx:id="sortingPanel" layoutX="115.0" layoutY="168.0" prefHeight="74.0" prefWidth="262.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
       <children>
          <Button fx:id="sortButton" layoutX="182.0" layoutY="37.0" mnemonicParsing="false" text="Сортировать" />
          <ComboBox fx:id="sortComboBox" layoutX="17.0" layoutY="37.0" prefWidth="150.0" />
          <Label layoutX="46.0" layoutY="14.0" text="Сортировать по:" />
       </children>
    </AnchorPane>
-   <AnchorPane fx:id="TableContainer" layoutX="3.0" layoutY="214.0" prefHeight="476.0" prefWidth="1090.0">
+   <AnchorPane fx:id="TableContainer" layoutX="3.0" layoutY="243.0" prefHeight="476.0" prefWidth="1090.0">
        <TableView fx:id="forecastTable" layoutX="6.0" layoutY="17.0" prefHeight="459.0" prefWidth="1079.0">
          <columns>
            <TableColumn fx:id="maxtemp_c" prefWidth="87.20001220703125" text="Max. temp, C">
@@ -78,16 +78,19 @@
          </columns>
        </TableView>
    </AnchorPane>
-   <AnchorPane fx:id="filterPanel" layoutX="511.0" layoutY="150.0" prefHeight="74.0" prefWidth="494.0">
+   <AnchorPane fx:id="filterPanel" layoutX="511.0" layoutY="179.0" prefHeight="74.0" prefWidth="541.0">
       <children>
-         <Button fx:id="filterButton" layoutX="313.0" layoutY="24.0" mnemonicParsing="false" text="Фильтр" />
+         <Button fx:id="filterButton" layoutX="360.0" layoutY="24.0" mnemonicParsing="false" text="Фильтр" />
          <ComboBox fx:id="filterComboBox" layoutX="14.0" layoutY="24.0" prefWidth="150.0" />
-         <Label layoutX="59.0" layoutY="5.0" text="Фильтр по:" />
-         <TextField fx:id="filterValue" layoutX="235.0" layoutY="24.0" prefHeight="26.0" prefWidth="72.0" promptText="Filter value" />
-         <Button fx:id="clearFilterButton" layoutX="376.0" layoutY="24.0" mnemonicParsing="false" text="Очистить фильтр" />
+         <Label fx:id="filterLabel" layoutX="59.0" layoutY="5.0" text="Фильтр по:" />
+         <TextField fx:id="filterValue" layoutX="235.0" layoutY="24.0" prefHeight="26.0" prefWidth="117.0" promptText="Значение фильтра" />
+         <Button fx:id="clearFilterButton" layoutX="423.0" layoutY="24.0" mnemonicParsing="false" text="Очистить фильтр" />
          <ComboBox fx:id="signButton" layoutX="176.0" layoutY="24.0" prefHeight="26.0" prefWidth="0.0" />
       </children>
    </AnchorPane>
-   <TextField fx:id="daysTextField" layoutX="522.0" layoutY="81.0" prefHeight="26.0" prefWidth="50.0" />
-   <Label layoutX="499.0" layoutY="63.0" text="Количество дней:" />
+   <TextField fx:id="daysTextField" layoutX="503.0" layoutY="110.0" prefHeight="26.0" prefWidth="87.0" promptText="Кол-во дней" />
+   <Label fx:id="daysLabel" layoutX="499.0" layoutY="92.0" text="Количество дней:" />
+   <Label layoutX="529.0" layoutY="42.0" text="Город:" />
+   <TextField fx:id="cityTextField" layoutX="473.0" layoutY="67.0" promptText="Введите город" />
+   <Label fx:id="errorLabel" layoutX="656.0" layoutY="151.0" text="c" />
 </AnchorPane>
