@@ -48,6 +48,8 @@ public class ForecastController {
     @FXML
     private TextField filterValue;
 
+    private ProgressIndicator progressIndicator;
+
     private ObservableList<Day> items;
 
     @FXML
@@ -102,6 +104,7 @@ public class ForecastController {
         catch (NumberFormatException e){
             Platform.runLater(() -> {
                 errorLabel.setText(String.format("Поле '%s' должно быть целочисленным значением!", label.getText()));
+                progressIndicator.setVisible(false);
             });
         }
     }
@@ -122,7 +125,7 @@ public class ForecastController {
 
         Thread thread = new Thread(() -> {
             try {
-                ProgressIndicator progressIndicator = loadProgressIndicator();
+                progressIndicator = loadProgressIndicator();
                 validateIntInput(daysTextField, daysLabel);
                 String cityValue = cityTextField.getText();
                 int daysValue = Integer.parseInt(daysTextField.getText());
@@ -133,9 +136,12 @@ public class ForecastController {
                         .collect(Collectors.toList());
                 items = FXCollections.observableList(days);
                 forecastTable.setItems(items);
-                Platform.runLater(() -> containerPane.getChildren().remove(progressIndicator));
+                Platform.runLater(() -> progressIndicator.setVisible(false));
             } catch (IOException e) {
-                Platform.runLater(() -> errorLabel.setText(e.getLocalizedMessage()));
+                Platform.runLater(() -> {
+                    errorLabel.setText(e.getLocalizedMessage());
+                    progressIndicator.setVisible(false);
+                });
             }
         });
         thread.start();
